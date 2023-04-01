@@ -1,15 +1,45 @@
+import 'package:favourite_with_them/Them/theme_changer_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class DarkThem extends StatefulWidget {
-  const DarkThem({Key? key}) : super(key: key);
+class DarkThemeScreen extends StatefulWidget {
+  const DarkThemeScreen({Key? key}) : super(key: key);
 
   @override
-  _DarkThemState createState() => _DarkThemState();
+  _DarkThemeScreenState createState() => _DarkThemeScreenState();
 }
 
-class _DarkThemState extends State<DarkThem> {
+class _DarkThemeScreenState extends State<DarkThemeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    final themeChanger=Provider.of<ThemeChanger>(context);
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Screen"),
+      ),
+      body: Column(
+        children: [
+          RadioListTile<ThemeMode>(
+            title: Text("Light mode"),
+              value: ThemeMode.light,
+              groupValue: themeChanger.themeMode,
+              onChanged: themeChanger.setTheme,
+          ),
+          RadioListTile<ThemeMode>(
+            title: Text("Dark mode"),
+            value: ThemeMode.dark,
+            groupValue: themeChanger.themeMode,
+            onChanged: themeChanger.setTheme,
+          ),
+          RadioListTile<ThemeMode>(
+            title: Text("Syatem mode"),
+            value: ThemeMode.light,
+            groupValue: themeChanger.themeMode,
+            onChanged: themeChanger.setTheme,
+          ),
+          Icon(Icons.favorite),
+        ],
+      ),
+    );
   }
 }
